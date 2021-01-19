@@ -270,16 +270,22 @@ def main():
         user_input = input("Input guess number : ")
         
         while not is_validated_number(user_input) and user_input != '0':
-          user_input = input("Wrong Input, Input again ")
+          print("Wrong Input, Input again ")
+          user_input = input("Input guess number : ")
         
         if not int(user_input):
-            
-            break
+          break
         
         strike, ball = get_strikes_or_ball(user_input, random_number)
         print(f'Strikes : {strike} , Balls : {ball}')
         if strike == 3:
-          answer = is_yes(input("You win, one more(Y/N)"))
+          more_answer = input("You win, one more(Y/N) ")
+          while not is_yes(more_answer) and not is_no(more_answer):
+            print("Wrong Input, Input again ")
+            more_answer = input("You win, one more(Y/N) ")
+
+          answer = is_yes(more_answer)
+          
           if answer:
             random_number = str(get_not_duplicated_three_digit_number())
             print("Random Number is : ", random_number)
